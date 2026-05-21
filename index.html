@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kishor A — Pentester & Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:      #0d1117;
+  --bg2:     #161b22;
+  --bg3:     #1c2230;
+  --cyan:    #22d3ee;
+  --cyan-dim:#0e7490;
+  --cyan-glow: rgba(34,211,238,0.08);
+  --white:   #f0f6fc;
+  --white-2: #8b949e;
+  --white-3: #3d444d;
+  --border:  #21262d;
+  --border2: #30363d;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+::selection{background:var(--cyan);color:#000;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--cyan-dim);border-radius:2px;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  height:56px;
+  background:rgba(13,17,23,0.92);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+  z-index:100;
+  backdrop-filter:blur(12px);
+}
+.nav-logo{
+  font-family:'JetBrains Mono',monospace;
+  font-size:14px;font-weight:600;
+  color:var(--white);
+  letter-spacing:.5px;
+}
+.nav-logo span{color:var(--cyan);}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{
+  color:var(--white-2);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:400;
+  transition:color .2s;
+  letter-spacing:.3px;
+}
+.nav-links a:hover{color:var(--white);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  max-width:960px;
+  margin:0 auto;
+  padding:8rem 2.5rem 5rem;
+  display:flex;align-items:center;
+}
+.hero-inner{width:100%;}
+.hero-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--cyan);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:.75rem;
+}
+.hero-label::before{
+  content:'';width:32px;height:1px;background:var(--cyan);
+}
+.hero-name{
+  font-size:clamp(2.8rem,6vw,4.5rem);
+  font-weight:600;
+  color:var(--white);
+  line-height:1.05;
+  letter-spacing:-1.5px;
+  margin-bottom:.75rem;
+}
+.hero-name em{
+  font-style:normal;
+  color:transparent;
+  -webkit-text-stroke:1px var(--cyan);
+}
+.hero-sub{
+  font-size:1.1rem;
+  color:var(--white-2);
+  font-weight:300;
+  margin-bottom:2rem;
+  letter-spacing:.2px;
+}
+.hero-sub strong{color:var(--white);font-weight:500;}
+.hero-desc{
+  max-width:580px;
+  font-size:14px;
+  color:var(--white-2);
+  line-height:1.9;
+  margin-bottom:2.5rem;
+}
+.hero-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:3rem;}
+.chip{
+  font-size:12px;
+  padding:5px 14px;
+  border-radius:100px;
+  border:1px solid var(--border2);
+  color:var(--white-2);
+  font-weight:400;
+  letter-spacing:.3px;
+}
+.chip.hl{
+  border-color:var(--cyan-dim);
+  color:var(--cyan);
+  background:var(--cyan-glow);
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:11px 24px;
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  font-weight:500;
+  border-radius:6px;
+  text-decoration:none;
+  transition:all .2s;
+  letter-spacing:.3px;
+  cursor:pointer;
+}
+.btn-primary{
+  background:var(--cyan);color:#000;border:1px solid var(--cyan);
+}
+.btn-primary:hover{background:transparent;color:var(--cyan);}
+.btn-ghost{
+  background:transparent;
+  color:var(--white-2);
+  border:1px solid var(--border2);
+}
+.btn-ghost:hover{border-color:var(--white-2);color:var(--white);}
+
+/* ── SECTION ── */
+section{
+  max-width:960px;
+  margin:0 auto;
+  padding:6rem 2.5rem;
+}
+.sec-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--cyan);
+  text-transform:uppercase;
+  letter-spacing:3px;
+  margin-bottom:.75rem;
+}
+.sec-title{
+  font-size:1.75rem;
+  font-weight:600;
+  color:var(--white);
+  letter-spacing:-.5px;
+  margin-bottom:.5rem;
+}
+.sec-desc{
+  font-size:14px;
+  color:var(--white-2);
+  margin-bottom:3rem;
+}
+hr.div{border:none;border-top:1px solid var(--border);margin:0 2.5rem;}
+
+/* ── ABOUT GRID ── */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:2rem;
+}
+.about-cell{
+  background:var(--bg2);
+  padding:1.5rem;
+}
+.about-cell-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  color:var(--white-3);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:.5rem;
+}
+.about-cell-val{
+  font-size:14px;
+  color:var(--white);
+  font-weight:500;
+}
+.about-cell-val.cyan{color:var(--cyan);}
+.about-cell-val.dim{color:var(--white-2);font-weight:400;}
+
+/* ── SKILLS ── */
+.skills-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.skill-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:1.5rem;
+  transition:border-color .2s;
+}
+.skill-card:hover{border-color:var(--border2);}
+.skill-card-head{
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--cyan);
+  margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.skill-card-head::after{content:'';flex:1;height:1px;background:var(--border);}
+.skill-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:5px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+  color:var(--white-2);
+}
+.skill-row:last-child{border:none;}
+.skill-badge{
+  font-size:10px;
+  padding:2px 8px;
+  border-radius:100px;
+  font-family:'JetBrains Mono',monospace;
+}
+.badge-strong{background:rgba(34,211,238,.1);color:var(--cyan);border:1px solid var(--cyan-dim);}
+.badge-learning{background:rgba(251,191,36,.07);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
+.badge-familiar{background:rgba(139,148,158,.08);color:var(--white-2);border:1px solid var(--border2);}
+
+/* ── EXPERIENCE ── */
+.exp-item{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:1.75rem;
+  margin-bottom:1rem;
+  transition:border-color .2s;
+  position:relative;
+  overflow:hidden;
+}
+.exp-item::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;
+  width:3px;
+  background:var(--cyan);
+  opacity:0;
+  transition:opacity .2s;
+}
+.exp-item:hover{border-color:var(--border2);}
+.exp-item:hover::before{opacity:1;}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap;}
+.exp-role{font-size:15px;font-weight:600;color:var(--white);}
+.exp-org{font-size:13px;color:var(--cyan);margin-top:2px;font-weight:400;}
+.exp-period{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--white-2);
+  padding:4px 10px;
+  border:1px solid var(--border);
+  border-radius:4px;
+  white-space:nowrap;
+}
+.exp-points{list-style:none;}
+.exp-points li{
+  font-size:13px;
+  color:var(--white-2);
+  padding:4px 0 4px 1.25rem;
+  position:relative;
+  line-height:1.7;
+}
+.exp-points li::before{
+  content:'→';
+  position:absolute;left:0;
+  color:var(--cyan);
+  font-size:12px;
+}
+
+/* ── EDUCATION ── */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;}
+.edu-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:1.5rem;
+  transition:border-color .2s;
+}
+.edu-card:hover{border-color:var(--border2);}
+.edu-status{
+  display:inline-block;
+  font-size:10px;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:1px;
+  padding:3px 10px;
+  border-radius:100px;
+  margin-bottom:1rem;
+  text-transform:uppercase;
+}
+.s-done{background:rgba(34,211,238,.1);color:var(--cyan);border:1px solid var(--cyan-dim);}
+.s-prog{background:rgba(251,191,36,.07);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
+.s-train{background:rgba(167,139,250,.08);color:#a78bfa;border:1px solid rgba(167,139,250,.3);}
+.edu-degree{font-size:14px;font-weight:600;color:var(--white);margin-bottom:.35rem;line-height:1.4;}
+.edu-inst{font-size:12px;color:var(--cyan);margin-bottom:.75rem;}
+.edu-detail{font-size:12px;color:var(--white-2);line-height:1.8;}
+
+/* ── CTF ── */
+.ctf-featured{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:2rem;
+  margin-bottom:1rem;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:2rem;
+  align-items:start;
+  transition:border-color .2s;
+  text-decoration:none;
+}
+.ctf-featured:hover{border-color:var(--cyan-dim);}
+.ctf-platform-badge{
+  font-size:10px;
+  font-family:'JetBrains Mono',monospace;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--white-2);
+  margin-bottom:.5rem;
+}
+.ctf-name{font-size:18px;font-weight:600;color:var(--white);margin-bottom:.5rem;}
+.ctf-desc{font-size:13px;color:var(--white-2);line-height:1.8;margin-bottom:1rem;}
+.ctf-chips{display:flex;flex-wrap:wrap;gap:.4rem;}
+.ctf-chip{
+  font-size:11px;
+  padding:3px 10px;
+  border-radius:100px;
+  border:1px solid var(--border2);
+  color:var(--white-2);
+  font-family:'JetBrains Mono',monospace;
+}
+.ctf-chip.hl{border-color:var(--cyan-dim);color:var(--cyan);}
+.ctf-arrow{
+  color:var(--cyan);
+  font-size:20px;
+  font-weight:300;
+  margin-top:.25rem;
+}
+.ctf-more-label{
+  font-size:12px;
+  color:var(--white-2);
+  margin-bottom:1rem;
+}
+.ctf-repo-link{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:13px;
+  color:var(--cyan);
+  text-decoration:none;
+  border:1px solid var(--cyan-dim);
+  border-radius:6px;
+  padding:10px 20px;
+  transition:all .2s;
+  background:var(--cyan-glow);
+}
+.ctf-repo-link:hover{background:rgba(34,211,238,.15);}
+
+/* ── TERMINAL ── */
+.terminal{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+  margin-top:2rem;
+}
+.term-bar{
+  background:var(--bg3);
+  border-bottom:1px solid var(--border);
+  padding:10px 1.25rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.dot{width:11px;height:11px;border-radius:50%;}
+.dr{background:#ff5f57;} .dy{background:#febc2e;} .dg{background:#28c840;}
+.term-fname{font-size:11px;color:var(--white-2);margin-left:.5rem;font-family:'JetBrains Mono',monospace;}
+.term-body{padding:1.5rem;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:2;}
+.t-prompt{color:var(--white-2);}
+.t-prompt .u{color:var(--cyan);}
+.t-cmd{color:var(--white);}
+.t-out{color:#4ade80;padding-left:1.25rem;}
+.t-out-c{color:var(--cyan);padding-left:1.25rem;}
+.t-out-y{color:#fbbf24;padding-left:1.25rem;}
+.t-cmt{color:var(--white-3);}
+
+/* ── TOOLS ── */
+.tools-wrap{display:flex;flex-wrap:wrap;gap:.5rem;}
+.tool{
+  font-size:12px;
+  font-family:'JetBrains Mono',monospace;
+  padding:6px 14px;
+  border-radius:6px;
+  border:1px solid var(--border);
+  color:var(--white-2);
+  transition:all .2s;
+  letter-spacing:.3px;
+}
+.tool:hover{border-color:var(--border2);color:var(--white);}
+.tool.primary{border-color:var(--cyan-dim);color:var(--cyan);background:var(--cyan-glow);}
+.tool.secondary{border-color:var(--border2);color:var(--white-2);}
+
+/* ── FREELANCE ── */
+.freelance-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.service-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:1.75rem;
+  transition:border-color .2s;
+  position:relative;
+  overflow:hidden;
+}
+.service-card:hover{border-color:var(--cyan-dim);}
+.service-icon{
+  width:40px;height:40px;
+  border-radius:8px;
+  background:var(--cyan-glow);
+  border:1px solid var(--cyan-dim);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-size:16px;
+  color:var(--cyan);
+  margin-bottom:1.25rem;
+}
+.service-name{font-size:15px;font-weight:600;color:var(--white);margin-bottom:.5rem;}
+.service-desc{font-size:13px;color:var(--white-2);line-height:1.8;margin-bottom:1rem;}
+.service-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+.service-tag{
+  font-size:10px;
+  font-family:'JetBrains Mono',monospace;
+  padding:3px 8px;
+  border-radius:4px;
+  border:1px solid var(--border2);
+  color:var(--white-2);
+}
+.freelance-cta{
+  margin-top:2rem;
+  background:var(--bg2);
+  border:1px solid var(--cyan-dim);
+  border-radius:8px;
+  padding:2rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:2rem;
+  flex-wrap:wrap;
+}
+.freelance-cta-text{font-size:14px;color:var(--white-2);max-width:500px;line-height:1.8;}
+.freelance-cta-text strong{color:var(--white);display:block;font-size:16px;margin-bottom:.35rem;}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;}
+.contact-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:1.5rem;
+  text-decoration:none;
+  display:block;
+  transition:border-color .2s;
+}
+.contact-card:hover{border-color:var(--cyan-dim);}
+.contact-icon{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--cyan);letter-spacing:1px;margin-bottom:.5rem;}
+.contact-label{font-size:11px;color:var(--white-2);margin-bottom:.25rem;text-transform:uppercase;letter-spacing:1px;}
+.contact-val{font-size:13px;color:var(--white);font-weight:500;word-break:break-all;}
+
+.status-bar{
+  margin-top:2rem;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:1.25rem 1.5rem;
+  display:flex;align-items:center;gap:.75rem;
+  font-size:13px;
+}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;flex-shrink:0;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.2)}}
+.status-txt{color:var(--white-2);}
+.status-txt strong{color:var(--white);}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:2rem 2.5rem;
+  max-width:960px;
+  margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  font-size:12px;color:var(--white-2);
+}
+footer span{font-family:'JetBrains Mono',monospace;color:var(--cyan);}
+
+@media(max-width:680px){
+  nav{padding:0 1.25rem;}
+  .nav-links{display:none;}
+  section,.hero{padding-left:1.25rem;padding-right:1.25rem;}
+  .about-grid{grid-template-columns:1fr;}
+  .ctf-featured{grid-template-columns:1fr;}
+  .ctf-arrow{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Kishor <span>A</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#ctf">Writeups</a>
+    <a href="#freelance">Freelance</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-label">Full Stack Developer → Penetration Tester</div>
+    <h1 class="hero-name">Kishor <em>A</em></h1>
+    <p class="hero-sub"><strong>Security Researcher</strong> &nbsp;·&nbsp; Bengaluru, India</p>
+    <p class="hero-desc">
+      BCA graduate with ~2.5 years of enterprise development experience in .NET, React, TypeScript, and SQL — now transitioning into cybersecurity with a sharp focus on penetration testing and VAPT. Currently pursuing MSc in Cyber Forensics & Information Security and training for CPTv4 at Red Team Hacker Academy.
+    </p>
+    <div class="hero-chips">
+      <span class="chip hl">Penetration Testing</span>
+      <span class="chip hl">VAPT</span>
+      <span class="chip hl">CTF Player</span>
+      <span class="chip">Bug Bounty</span>
+      <span class="chip">.NET · React</span>
+      <span class="chip">Kali Linux</span>
+      <span class="chip">Web App Security</span>
+    </div>
+    <div class="hero-actions">
+      <a href="https://github.com/hackerrio34?tab=repositories" target="_blank" class="btn btn-primary">View Writeups</a>
+      <a href="https://www.linkedin.com/in/kishor-a-59653023a/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+      <a href="mailto:krishkishor245@gmail.com" class="btn btn-ghost">Contact Me</a>
+    </div>
+  </div>
+</div>
+
+<hr class="div"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">01 — About</div>
+  <div class="sec-title">Who am I</div>
+  <p class="sec-desc">A developer who understands how systems are built — and now learning how they break.</p>
+
+  <div class="about-grid">
+    <div class="about-cell">
+      <div class="about-cell-label">Current Status</div>
+      <div class="about-cell-val cyan">Developer → Pentester Transition</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Target Role</div>
+      <div class="about-cell-val">Junior Pentester / VAPT Analyst</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Location</div>
+      <div class="about-cell-val dim">Bengaluru, Karnataka, India</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Practice Platforms</div>
+      <div class="about-cell-val dim">VulnHub · HackTheBox · TryHackMe</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Focus Areas</div>
+      <div class="about-cell-val dim">Web App Pentesting · Network Security</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-label">Developer Edge</div>
+      <div class="about-cell-val dim">Auth flows · RBAC · API internals</div>
+    </div>
+  </div>
+
+  <div class="terminal">
+    <div class="term-bar">
+      <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
+      <span class="term-fname">kishor@kali — bash</span>
+    </div>
+    <div class="term-body">
+      <div><span class="t-prompt"><span class="u">kishor@kali</span>:~$</span> <span class="t-cmd">cat career_goal.txt</span></div>
+      <div class="t-out-c">Junior Pentester → Senior VAPT Engineer → Independent Security Consultant</div>
+      <div style="margin-top:.75rem;"><span class="t-prompt"><span class="u">kishor@kali</span>:~$</span> <span class="t-cmd">echo $ADVANTAGE</span></div>
+      <div class="t-out-y">"2.5 years building auth, APIs & RBAC → I know exactly where devs make mistakes"</div>
+    </div>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-label">02 — Skills</div>
+  <div class="sec-title">Technical Arsenal</div>
+  <p class="sec-desc">Built from 2.5 years of development work, now sharpened with security tools and methodology.</p>
+
+  <div class="skills-wrap">
+    <div class="skill-card">
+      <div class="skill-card-head">Security Tools</div>
+      <div class="skill-row">Nmap <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">WPScan <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">Gobuster / ffuf <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">Hydra / CeWL <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">Burp Suite <span class="skill-badge badge-learning">learning</span></div>
+      <div class="skill-row">Metasploit <span class="skill-badge badge-learning">learning</span></div>
+      <div class="skill-row">Nikto / OWASP ZAP <span class="skill-badge badge-familiar">familiar</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-head">Development</div>
+      <div class="skill-row">C# / .NET Core <span class="skill-badge badge-strong">expert</span></div>
+      <div class="skill-row">React / TypeScript <span class="skill-badge badge-strong">expert</span></div>
+      <div class="skill-row">JavaScript <span class="skill-badge badge-strong">expert</span></div>
+      <div class="skill-row">SQL / RDBMS <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">REST APIs <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">HTML / CSS <span class="skill-badge badge-strong">strong</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-head">OS & Scripting</div>
+      <div class="skill-row">Kali Linux <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">Git / GitHub <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">Windows <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">Bash / Shell <span class="skill-badge badge-learning">learning</span></div>
+      <div class="skill-row">Python <span class="skill-badge badge-familiar">familiar</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-head">Security Concepts</div>
+      <div class="skill-row">OWASP Top 10</div>
+      <div class="skill-row">Network Recon & Enum</div>
+      <div class="skill-row">Privilege Escalation</div>
+      <div class="skill-row">Web App Exploitation</div>
+      <div class="skill-row">Password Attacks</div>
+      <div class="skill-row">Auth / RBAC Patterns</div>
+      <div class="skill-row">TCP/IP · OSI Model</div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;">
+    <p style="font-size:11px;color:var(--white-2);text-transform:uppercase;letter-spacing:2px;margin-bottom:1rem;">Tools I use regularly</p>
+    <div class="tools-wrap">
+      <span class="tool primary">Nmap</span>
+      <span class="tool primary">WPScan</span>
+      <span class="tool primary">Gobuster</span>
+      <span class="tool primary">Hydra</span>
+      <span class="tool primary">CeWL</span>
+      <span class="tool secondary">Burp Suite</span>
+      <span class="tool secondary">Metasploit</span>
+      <span class="tool secondary">Nikto</span>
+      <span class="tool">Wireshark</span>
+      <span class="tool">GTFOBins</span>
+      <span class="tool">HackTricks</span>
+      <span class="tool">PayloadsAllTheThings</span>
+      <span class="tool">OWASP ZAP</span>
+    </div>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-label">03 — Experience</div>
+  <div class="sec-title">Work & Practice</div>
+  <p class="sec-desc">Professional development background combined with hands-on security research.</p>
+
+  <div class="exp-item">
+    <div class="exp-top">
+      <div>
+        <div class="exp-role">Full Stack Developer</div>
+        <div class="exp-org">Enterprise Web Applications</div>
+      </div>
+      <div class="exp-period">~2.5 years</div>
+    </div>
+    <ul class="exp-points">
+      <li>Built full-stack enterprise features using .NET Core APIs and React/TypeScript frontend</li>
+      <li>Implemented authentication, authorization flows, and role-based access control (RBAC)</li>
+      <li>Designed SQL schemas, wrote optimized queries, stored procedures, and data integrity logic</li>
+      <li>Collaborated with QA, product, and UI/UX teams using Git and Agile delivery practices</li>
+      <li>Developer knowledge → deep insight into how web apps are architected → how they can be exploited</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-top">
+      <div>
+        <div class="exp-role">CTF Player & Security Researcher</div>
+        <div class="exp-org">VulnHub · HackTheBox · TryHackMe</div>
+      </div>
+      <div class="exp-period">Active</div>
+    </div>
+    <ul class="exp-points">
+      <li>Completed 5–10 machines across multiple platforms with documented methodology</li>
+      <li>Practiced full pentest workflow: recon → enumeration → exploitation → privilege escalation</li>
+      <li>Publishing detailed writeups on GitHub as a growing security portfolio</li>
+      <li>Focus: WordPress exploitation, restricted shell escape, sudo misconfigs, web app vulns</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-label">04 — Education</div>
+  <div class="sec-title">Qualifications & Training</div>
+  <p class="sec-desc">Academic foundation in computer science, now specializing in cybersecurity.</p>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <span class="edu-status s-done">Completed</span>
+      <div class="edu-degree">BCA — Bachelor of Computer Applications</div>
+      <div class="edu-inst">Undergraduate Degree</div>
+      <div class="edu-detail">Programming fundamentals · Web development · Databases · Networking · Operating Systems</div>
+    </div>
+    <div class="edu-card">
+      <span class="edu-status s-prog">In Progress — Year 2</span>
+      <div class="edu-degree">MSc Cyber Forensics & Information Security</div>
+      <div class="edu-inst">University of Madras (Distance)</div>
+      <div class="edu-detail">Cyber forensics · Incident response · Network security · Digital evidence · Cybercrime law</div>
+    </div>
+    <div class="edu-card">
+      <span class="edu-status s-train">Training</span>
+      <div class="edu-degree">CPTv4 — Certified Penetration Tester v4</div>
+      <div class="edu-inst">Red Team Hacker Academy, Bangalore</div>
+      <div class="edu-detail">Network security · Scanning & enumeration · Web app pentesting · Exploitation · Reporting</div>
+    </div>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- CTF WRITEUPS -->
+<section id="ctf">
+  <div class="sec-label">05 — CTF Writeups</div>
+  <div class="sec-title">Security Research</div>
+  <p class="sec-desc">Documented penetration testing methodology across CTF machines. Every step explained.</p>
+
+  <a href="https://github.com/hackerrio34/DC-2-VulnHub-/blob/main/DC-2_Walkthrough.md" target="_blank" class="ctf-featured">
+    <div>
+      <div class="ctf-platform-badge">VulnHub · Beginner</div>
+      <div class="ctf-name">DC-2 — Full Walkthrough</div>
+      <div class="ctf-desc">
+        Complete penetration test of the DC-2 machine. Covered WordPress enumeration, custom wordlist generation with CeWL, XML-RPC brute force, restricted shell escape via vi, and privilege escalation through a sudo git misconfiguration.
+      </div>
+      <div class="ctf-chips">
+        <span class="ctf-chip hl">WordPress</span>
+        <span class="ctf-chip hl">WPScan</span>
+        <span class="ctf-chip hl">CeWL</span>
+        <span class="ctf-chip hl">rbash escape</span>
+        <span class="ctf-chip hl">sudo privesc</span>
+        <span class="ctf-chip">SSH</span>
+        <span class="ctf-chip">GTFOBins</span>
+      </div>
+    </div>
+    <div class="ctf-arrow">↗</div>
+  </a>
+
+  <p class="ctf-more-label">More writeups available on GitHub — updated regularly as new machines are completed.</p>
+  <a href="https://github.com/hackerrio34?tab=repositories" target="_blank" class="ctf-repo-link">
+    View all repositories ↗
+  </a>
+
+  <div class="terminal">
+    <div class="term-bar">
+      <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
+      <span class="term-fname">dc2_attack_chain.sh</span>
+    </div>
+    <div class="term-body">
+      <div class="t-cmt"># DC-2 — Full attack chain</div>
+      <div style="margin-top:.5rem;"><span class="t-prompt"><span class="u">kishor@kali</span>:~$</span> <span class="t-cmd">nmap -Pn -sV -sC -p- 192.168.0.131</span></div>
+      <div class="t-out-c">→ Port 80 (WordPress 4.7.10) + Port 7744 (SSH)</div>
+      <div style="margin-top:.25rem;"><span class="t-prompt"><span class="u">kishor@kali</span>:~$</span> <span class="t-cmd">wpscan --url http://dc-2/ --enumerate u,vp,vt</span></div>
+      <div class="t-out-c">→ Users found: admin, jerry, tom</div>
+      <div style="margin-top:.25rem;"><span class="t-prompt"><span class="u">kishor@kali</span>:~$</span> <span class="t-cmd">cewl http://dc-2/ -w wordlist.txt && wpscan --password-attack xmlrpc</span></div>
+      <div class="t-out-c">→ jerry:adipiscing / tom:parturient</div>
+      <div style="margin-top:.25rem;"><span class="t-prompt"><span class="u">kishor@kali</span>:~$</span> <span class="t-cmd">ssh tom@192.168.0.131 -p 7744 <span class="t-cmt"># rbash jail</span></span></div>
+      <div class="t-out-c">→ vi escape → :set shell=/bin/sh → su jerry:adipiscing</div>
+      <div style="margin-top:.25rem;"><span class="t-prompt"><span class="u">kishor@kali</span>:~$</span> <span class="t-cmd">sudo -l <span class="t-cmt"># (root) NOPASSWD: /usr/bin/git</span></span></div>
+      <div class="t-out-c">→ sudo git log --help → !/bin/bash</div>
+      <div style="margin-top:.5rem;" class="t-out">root@DC-2:~# cat /root/final-flag.txt  ✓  ROOTED</div>
+    </div>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- FREELANCE -->
+<section id="freelance">
+  <div class="sec-label">06 — Freelance</div>
+  <div class="sec-title">Available for Hire</div>
+  <p class="sec-desc">Open to freelance projects in web development, API integration, and SaaS products. Remote-friendly.</p>
+
+  <div class="freelance-grid">
+    <div class="service-card">
+      <div class="service-icon">&lt;/&gt;</div>
+      <div class="service-name">Web Development</div>
+      <div class="service-desc">Full-stack web applications from scratch — responsive, fast, and production-ready. Landing pages to complex enterprise apps.</div>
+      <div class="service-tags">
+        <span class="service-tag">React</span>
+        <span class="service-tag">TypeScript</span>
+        <span class="service-tag">.NET Core</span>
+        <span class="service-tag">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">⚙</div>
+      <div class="service-name">API Development</div>
+      <div class="service-desc">Clean, well-documented REST APIs. Third-party integrations, payment gateways, authentication flows, and webhooks.</div>
+      <div class="service-tags">
+        <span class="service-tag">.NET Core</span>
+        <span class="service-tag">REST</span>
+        <span class="service-tag">Auth/JWT</span>
+        <span class="service-tag">SQL</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">☁</div>
+      <div class="service-name">SaaS Development</div>
+      <div class="service-desc">End-to-end SaaS product development — multi-tenancy, subscription billing, dashboards, and role-based access control.</div>
+      <div class="service-tags">
+        <span class="service-tag">Multi-tenant</span>
+        <span class="service-tag">RBAC</span>
+        <span class="service-tag">Subscriptions</span>
+        <span class="service-tag">Dashboards</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <div class="service-name">Maintenance & Support</div>
+      <div class="service-desc">Bug fixes, performance optimization, feature additions, and code reviews for existing web applications and APIs.</div>
+      <div class="service-tags">
+        <span class="service-tag">Bug Fixes</span>
+        <span class="service-tag">Optimization</span>
+        <span class="service-tag">Refactoring</span>
+        <span class="service-tag">Code Review</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="freelance-cta">
+    <div class="freelance-cta-text">
+      <strong>Have a project in mind?</strong>
+      I'm available for freelance work — web apps, APIs, SaaS, or maintenance contracts. Let's discuss your requirements and build something great together.
+    </div>
+    <a href="mailto:krishkishor245@gmail.com" class="btn btn-primary">Get in Touch</a>
+  </div>
+</section>
+
+<hr class="div"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label">07 — Contact</div>
+  <div class="sec-title">Get in Touch</div>
+  <p class="sec-desc">Open to junior penetration testing and VAPT analyst roles in Bengaluru. Let's connect.</p>
+
+  <div class="contact-grid">
+    <a href="mailto:krishkishor245@gmail.com" class="contact-card">
+      <div class="contact-icon">// email</div>
+      <div class="contact-label">Email</div>
+      <div class="contact-val">krishkishor245@gmail.com</div>
+    </a>
+    <a href="https://www.linkedin.com/in/kishor-a-59653023a/" target="_blank" class="contact-card">
+      <div class="contact-icon">// linkedin</div>
+      <div class="contact-label">LinkedIn</div>
+      <div class="contact-val">Kishor A</div>
+    </a>
+    <a href="https://github.com/hackerrio34" target="_blank" class="contact-card">
+      <div class="contact-icon">// github</div>
+      <div class="contact-label">GitHub</div>
+      <div class="contact-val">hackerrio34</div>
+    </a>
+    <div class="contact-card">
+      <div class="contact-icon">// location</div>
+      <div class="contact-label">Based In</div>
+      <div class="contact-val">Bengaluru, India</div>
+    </div>
+  </div>
+
+  <div class="status-bar">
+    <div class="status-dot"></div>
+    <div class="status-txt">
+      <strong>Available for opportunities</strong> — Junior Pentester · VAPT Analyst · Freelance Dev · SaaS & API Projects
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2026 Kishor A · Built with purpose, deployed on GitHub Pages</div>
+  <div><span>"hack to learn, not learn to hack"</span></div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
