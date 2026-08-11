@@ -547,7 +547,7 @@ footer span{font-family:'JetBrains Mono',monospace;color:var(--cyan);}
     <h1 class="hero-name">Kishor <em>A</em></h1>
     <p class="hero-sub"><strong>Security Researcher</strong> &nbsp;·&nbsp; Bengaluru, India</p>
     <p class="hero-desc">
-      BCA graduate with ~2.5 years of enterprise development experience in .NET, React, TypeScript, and SQL — now transitioning into cybersecurity with a sharp focus on penetration testing and VAPT. Currently pursuing MSc in Cyber Forensics & Information Security and training for CPTv4 at Red Team Hacker Academy.
+      BCA graduate with ~2.5 years of enterprise development experience in .NET, React, TypeScript, and SQL — now transitioning into cybersecurity with a sharp focus on penetration testing and VAPT. Currently pursuing MSc in Cyber Forensics & Information Security, CPTv4 Certified Penetration Tester (Red Team Hacker Academy), and working toward eJPT.
     </p>
     <div class="hero-chips">
       <span class="chip hl">Penetration Testing</span>
@@ -630,8 +630,10 @@ footer span{font-family:'JetBrains Mono',monospace;color:var(--cyan);}
       <div class="skill-row">WPScan <span class="skill-badge badge-strong">strong</span></div>
       <div class="skill-row">Gobuster / ffuf <span class="skill-badge badge-strong">strong</span></div>
       <div class="skill-row">Hydra / CeWL <span class="skill-badge badge-strong">strong</span></div>
-      <div class="skill-row">Burp Suite <span class="skill-badge badge-learning">learning</span></div>
-      <div class="skill-row">Metasploit <span class="skill-badge badge-learning">learning</span></div>
+      <div class="skill-row">Burp Suite <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">Metasploit <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">SQLMap <span class="skill-badge badge-strong">strong</span></div>
+      <div class="skill-row">Postman <span class="skill-badge badge-strong">strong</span></div>
       <div class="skill-row">Nikto / OWASP ZAP <span class="skill-badge badge-familiar">familiar</span></div>
     </div>
     <div class="skill-card">
@@ -660,6 +662,7 @@ footer span{font-family:'JetBrains Mono',monospace;color:var(--cyan);}
       <div class="skill-row">Password Attacks</div>
       <div class="skill-row">Auth / RBAC Patterns</div>
       <div class="skill-row">TCP/IP · OSI Model</div>
+      <div class="skill-row">Active Directory Attacks</div>
     </div>
   </div>
 
@@ -674,7 +677,12 @@ footer span{font-family:'JetBrains Mono',monospace;color:var(--cyan);}
       <span class="tool secondary">Burp Suite</span>
       <span class="tool secondary">Metasploit</span>
       <span class="tool secondary">Nikto</span>
+      <span class="tool secondary">SQLMap</span>
+      <span class="tool secondary">Postman</span>
       <span class="tool">Wireshark</span>
+      <span class="tool">BloodHound</span>
+      <span class="tool">Mimikatz</span>
+      <span class="tool">Impacket</span>
       <span class="tool">GTFOBins</span>
       <span class="tool">HackTricks</span>
       <span class="tool">PayloadsAllTheThings</span>
@@ -717,10 +725,41 @@ footer span{font-family:'JetBrains Mono',monospace;color:var(--cyan);}
       <div class="exp-period">Active</div>
     </div>
     <ul class="exp-points">
-      <li>Completed 5–10 machines across multiple platforms with documented methodology</li>
+      <li>Completed 20+ machines across multiple platforms with documented methodology, ranked top 15% on TryHackMe</li>
       <li>Practiced full pentest workflow: recon → enumeration → exploitation → privilege escalation</li>
+      <li>Active Directory attack chains: Kerberoasting, AS-REP Roasting, BloodHound path mapping, Mimikatz credential dumping, Golden Ticket forging</li>
       <li>Publishing detailed writeups on GitHub as a growing security portfolio</li>
-      <li>Focus: WordPress exploitation, restricted shell escape, sudo misconfigs, web app vulns</li>
+      <li>Focus: WordPress exploitation, restricted shell escape, sudo misconfigs, web app vulns, AD lateral movement</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-top">
+      <div>
+        <div class="exp-role">Live CTF Engagements</div>
+        <div class="exp-org">FamPay Official CTF</div>
+      </div>
+      <div class="exp-period">2026 – Present</div>
+    </div>
+    <ul class="exp-points">
+      <li>Reverse-engineered a custom native signing algorithm in a compiled shared library (libfam.so) to reconstruct request-signing logic for a protected admin API endpoint</li>
+      <li>Rebuilt and validated the signing routine in Python against known-good guest signatures as part of an active admin-authentication forgery attempt</li>
+      <li>Solved a Firebase-backed challenge by identifying and exploiting an anonymous authentication bypass</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-top">
+      <div>
+        <div class="exp-role">AI-Assisted Web Vulnerability Scanner</div>
+        <div class="exp-org">Personal Project · Python, FastAPI, Nmap</div>
+      </div>
+      <div class="exp-period">2026 – Present</div>
+    </div>
+    <ul class="exp-points">
+      <li>Built a Python/FastAPI security automation tool integrating Nmap and custom checks to detect open ports, missing security headers, and OWASP Top 10-style issues</li>
+      <li>Implemented a dual-mode analysis engine: LLM-based (online) for AI-powered explanation and mitigation, rule-based (offline) for deterministic analysis, with safeguards against prompt injection</li>
+      <li>github.com/hackerrio34/ai-web-vuln-scanner</li>
     </ul>
   </div>
 </section>
@@ -746,10 +785,16 @@ footer span{font-family:'JetBrains Mono',monospace;color:var(--cyan);}
       <div class="edu-detail">Cyber forensics · Incident response · Network security · Digital evidence · Cybercrime law</div>
     </div>
     <div class="edu-card">
-      <span class="edu-status s-train">Training</span>
+      <span class="edu-status s-done">Certified</span>
       <div class="edu-degree">CPTv4 — Certified Penetration Tester v4</div>
       <div class="edu-inst">Red Team Hacker Academy, Bangalore</div>
       <div class="edu-detail">Network security · Scanning & enumeration · Web app pentesting · Exploitation · Reporting</div>
+    </div>
+    <div class="edu-card">
+      <span class="edu-status s-prog">In Progress</span>
+      <div class="edu-degree">eJPT — eLearnSecurity Junior Penetration Tester</div>
+      <div class="edu-inst">INE Security</div>
+      <div class="edu-detail">Network pentesting · Web app pentesting · Host & vulnerability assessment</div>
     </div>
   </div>
 </section>
@@ -777,6 +822,76 @@ footer span{font-family:'JetBrains Mono',monospace;color:var(--cyan);}
         <span class="ctf-chip hl">sudo privesc</span>
         <span class="ctf-chip">SSH</span>
         <span class="ctf-chip">GTFOBins</span>
+      </div>
+    </div>
+    <div class="ctf-arrow">↗</div>
+  </a>
+
+  <a href="https://github.com/hackerrio34/cyber-labs-tryhackme" target="_blank" class="ctf-featured">
+    <div>
+      <div class="ctf-platform-badge">TryHackMe · Active Directory</div>
+      <div class="ctf-name">Attacktive Directory</div>
+      <div class="ctf-desc">
+        Enumerated a live AD environment with Kerbrute, extracted service account hashes via AS-REP Roasting using Impacket's GetNPUsers.py, pulled SMB shares, and recovered domain credentials.
+      </div>
+      <div class="ctf-chips">
+        <span class="ctf-chip hl">Kerbrute</span>
+        <span class="ctf-chip hl">AS-REP Roasting</span>
+        <span class="ctf-chip hl">Impacket</span>
+        <span class="ctf-chip">SMB Enum</span>
+        <span class="ctf-chip">Hashcat</span>
+      </div>
+    </div>
+    <div class="ctf-arrow">↗</div>
+  </a>
+
+  <a href="https://github.com/hackerrio34/cyber-labs-tryhackme" target="_blank" class="ctf-featured">
+    <div>
+      <div class="ctf-platform-badge">TryHackMe · Post Exploitation</div>
+      <div class="ctf-name">Post Exploitation Basics</div>
+      <div class="ctf-desc">
+        PowerView-based AD enumeration, BloodHound attack-path mapping, Mimikatz credential and hash dumping, hashcat cracking, and Golden Ticket forging for domain persistence.
+      </div>
+      <div class="ctf-chips">
+        <span class="ctf-chip hl">PowerView</span>
+        <span class="ctf-chip hl">BloodHound</span>
+        <span class="ctf-chip hl">Mimikatz</span>
+        <span class="ctf-chip hl">Golden Ticket</span>
+        <span class="ctf-chip">Meterpreter</span>
+      </div>
+    </div>
+    <div class="ctf-arrow">↗</div>
+  </a>
+
+  <a href="https://github.com/hackerrio34/cyber-labs-tryhackme" target="_blank" class="ctf-featured">
+    <div>
+      <div class="ctf-platform-badge">TryHackMe · Windows Exploitation</div>
+      <div class="ctf-name">GoldenEye — Full Attack Chain</div>
+      <div class="ctf-desc">
+        POP3 enumeration and credential discovery, Moodle CMS exploitation leading to remote code execution, followed by privilege escalation to root.
+      </div>
+      <div class="ctf-chips">
+        <span class="ctf-chip hl">POP3 Enum</span>
+        <span class="ctf-chip hl">Moodle RCE</span>
+        <span class="ctf-chip hl">Privilege Escalation</span>
+        <span class="ctf-chip">Credential Discovery</span>
+      </div>
+    </div>
+    <div class="ctf-arrow">↗</div>
+  </a>
+
+  <a href="https://github.com/hackerrio34" target="_blank" class="ctf-featured">
+    <div>
+      <div class="ctf-platform-badge">Live CTF · FamPay Official</div>
+      <div class="ctf-name">FamPay Official CTF</div>
+      <div class="ctf-desc">
+        Reverse-engineered a custom native signing algorithm inside a compiled shared library (libfam.so) to reconstruct request-signing logic for a protected admin API endpoint, then rebuilt and validated the routine in Python. Separately exploited a Firebase anonymous-authentication bypass to retrieve a protected data node.
+      </div>
+      <div class="ctf-chips">
+        <span class="ctf-chip hl">Reverse Engineering</span>
+        <span class="ctf-chip hl">Native Library Analysis</span>
+        <span class="ctf-chip hl">API Signature Forging</span>
+        <span class="ctf-chip">Firebase Auth Bypass</span>
       </div>
     </div>
     <div class="ctf-arrow">↗</div>
