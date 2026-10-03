@@ -14,19 +14,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--y:#fcee0a;--c:#00f0ff;--bg:#07070d;--panel:rgba(11,13,24,.8);--ink:#e9eef5;--mut:#a3adc2;--line:rgba(0,240,255,.28);
+:root{--y:#d4af6a;--c:#6fd6c8;--bg:#060a16;--bg2:#0b1226;--panel:rgba(18,24,46,.55);--ink:#eef1f8;--mut:#9aa5c0;--line:rgba(212,175,106,.22);
 --head:'Chakra Petch','Arial Narrow',system-ui,sans-serif;--body:'Rajdhani','Segoe UI',system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{background:var(--bg);color:var(--ink);font:500 18px/1.55 var(--body)}
+body{background:radial-gradient(ellipse at 50% -10%,var(--bg2),var(--bg) 60%);color:var(--ink);font:500 18px/1.55 var(--body)}
 a{color:var(--c)}
 :focus-visible{outline:3px solid var(--y);outline-offset:3px}
-#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
-body::after{content:'';position:fixed;inset:0;z-index:5;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;opacity:.75}
+body::after{content:'';position:fixed;inset:0;z-index:5;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,transparent 40%,rgba(6,10,22,.45) 100%)}
 main,header,footer{position:relative;z-index:2}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
-header{position:sticky;top:0;z-index:6;background:rgba(7,7,13,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:6;background:rgba(8,12,24,.65);backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--line)}
 header .wrap{display:flex;align-items:center;gap:24px;height:56px}
 .brand{font:700 19px var(--head);color:var(--y);text-decoration:none;letter-spacing:.04em}
 nav{display:flex;gap:22px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
@@ -35,22 +35,27 @@ nav a{color:var(--mut);text-decoration:none;font-weight:600;white-space:nowrap}
 nav a:hover{color:var(--c)}
 
 .hero{min-height:calc(100vh - 56px);display:flex;align-items:center;padding:60px 0}
-.glitch{font:700 clamp(3.4rem,13vw,9rem)/.95 var(--head);color:var(--y);position:relative;display:inline-block;letter-spacing:-.02em}
-.glitch::before,.glitch::after{content:attr(data-t);position:absolute;inset:0;opacity:0}
-.glitch::before{color:var(--c);clip-path:inset(0 0 55% 0)}
-.glitch::after{color:#ff2a6d;clip-path:inset(55% 0 0 0)}
-.glitch.go::before,.glitch.go::after,.glitch:hover::before,.glitch:hover::after{animation:gl .5s steps(2) 3}
-@keyframes gl{0%{opacity:.9;transform:translate(-4px,1px)}50%{opacity:.9;transform:translate(5px,-2px)}100%{opacity:0;transform:none}}
+.glitch{font:700 clamp(3.4rem,13vw,8.4rem)/.95 var(--head);background:linear-gradient(100deg,var(--y),#f3e3c3 45%,var(--c));-webkit-background-clip:text;background-clip:text;color:transparent;position:relative;display:inline-block;letter-spacing:-.02em;opacity:0;transform:translateY(16px);animation:rise 1s cubic-bezier(.22,1,.36,1) .15s forwards}
+@keyframes rise{to{opacity:1;transform:none}}
 .tagline{font:700 clamp(1.3rem,3.4vw,2rem) var(--head);margin-top:18px}
 .tagline b{color:var(--c)}
 .lead{max-width:58ch;margin-top:18px;color:var(--mut);font-size:1.15rem}
 .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
-.btn{font:700 15px var(--head);letter-spacing:.06em;padding:13px 26px;text-decoration:none;color:var(--bg);background:var(--y);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
-.btn.alt{background:var(--c)}
-.btn:hover{filter:brightness(1.15)}
+.btn{font:700 15px var(--head);letter-spacing:.06em;padding:13px 26px;text-decoration:none;color:#0a0e1a;background:linear-gradient(120deg,var(--y),#e8cd8f);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s,filter .25s}
+.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px -10px rgba(212,175,106,.45);filter:brightness(1.08)}
 .status{margin-top:22px;color:var(--mut);font-size:1rem}
 .status i{display:inline-block;width:9px;height:9px;background:var(--y);margin-right:8px;animation:bl 1.6s infinite}
 @keyframes bl{50%{opacity:.25}}
+.role{color:var(--c);border-right:2px solid var(--c);padding-right:4px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;max-width:640px}
+.stats div{border-left:2px solid var(--line);padding-left:14px}
+.stats b{display:block;font:700 2.1rem var(--head);color:var(--y);line-height:1}
+.stats span{display:block;font-size:.82rem;color:var(--mut);margin-top:4px;letter-spacing:.03em}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
 
 section{padding:80px 0}
 h2{font:700 clamp(1.9rem,4.5vw,2.8rem)/1.1 var(--head);color:var(--y)}
@@ -58,15 +63,15 @@ h2 span{color:var(--c)}
 .sub{color:var(--mut);margin-top:8px;max-width:60ch}
 
 .filters{display:flex;gap:10px;margin:26px 0 22px;flex-wrap:wrap}
-.filters button{font:700 14px var(--head);letter-spacing:.06em;padding:9px 20px;background:transparent;color:var(--c);border:1px solid var(--c);cursor:pointer}
-.filters button[aria-pressed="true"]{background:var(--c);color:var(--bg)}
+.filters button{font:700 14px var(--head);letter-spacing:.06em;padding:9px 20px;background:transparent;color:var(--c);border:1px solid var(--c);cursor:pointer;transition:background .25s,color .25s}
+.filters button[aria-pressed="true"]{background:var(--c);color:#06121a}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;perspective:1000px}
-.card{background:var(--panel);border:1px solid var(--line);padding:24px;position:relative;transform-style:preserve-3d;transition:transform .15s ease-out,border-color .2s;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px))}
-.card:hover{border-color:var(--y)}
+.card{background:var(--panel);backdrop-filter:blur(16px) saturate(140%);border:1px solid var(--line);padding:24px;position:relative;transform-style:preserve-3d;transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .3s;clip-path:polygon(0 0,calc(100% - 22px) 0,100% 22px,100% 100%,22px 100%,0 calc(100% - 22px))}
+.card:hover{border-color:var(--y);box-shadow:0 20px 44px -16px rgba(212,175,106,.3)}
 .card[hidden]{display:none}
 .tag{display:inline-block;font:700 12px var(--head);padding:2px 10px;margin:0 6px 10px 0;letter-spacing:.06em}
-.tag.build{background:var(--c);color:var(--bg)}
-.tag.break{background:var(--y);color:var(--bg)}
+.tag.build{background:var(--c);color:#06121a}
+.tag.break{background:var(--y);color:#2a1d02}
 .card h3{font:700 1.25rem/1.25 var(--head);color:var(--ink);transform:translateZ(30px)}
 .card p{color:var(--mut);margin-top:8px;font-size:1.02rem}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
@@ -74,7 +79,7 @@ h2 span{color:var(--c)}
 .card .go{display:inline-block;margin-top:14px;font:700 14px var(--head);letter-spacing:.05em;color:var(--y)}
 
 .skills{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
-.skills div{background:var(--panel);border:1px solid var(--line);padding:24px}
+.skills div{background:var(--panel);backdrop-filter:blur(16px) saturate(140%);border:1px solid var(--line);padding:24px;border-radius:4px}
 .skills .b{border-top:4px solid var(--c)}
 .skills .k{border-top:4px solid var(--y)}
 .skills h3{font:700 1.3rem var(--head);margin-bottom:10px}
@@ -84,20 +89,40 @@ h2 span{color:var(--c)}
 
 .tl{margin-top:30px;border-left:2px solid var(--c);padding-left:28px}
 .tl article{position:relative;padding-bottom:28px}
-.tl article::before{content:'';position:absolute;left:-36px;top:9px;width:11px;height:11px;background:var(--y);transform:rotate(45deg)}
+.tl article::before{content:'';position:absolute;left:-36px;top:9px;width:11px;height:11px;background:var(--y);border-radius:2px;transform:rotate(45deg);box-shadow:0 0 10px 1px rgba(212,175,106,.5)}
 .tl time{color:var(--c);font:700 14px var(--head);letter-spacing:.05em}
 .tl h3{font:700 1.2rem/1.3 var(--head)}
 .tl .org{color:var(--mut)}
 .tl ul{margin:8px 0 0 18px;color:var(--mut);font-size:1.02rem}
 
 .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:28px}
-.contact a{display:block;background:var(--panel);border:1px solid var(--line);padding:20px;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .2s}
-.contact a:hover{border-color:var(--y);transform:translateY(-3px)}
+.contact a{display:block;background:var(--panel);backdrop-filter:blur(16px) saturate(140%);border:1px solid var(--line);border-radius:4px;padding:20px;text-decoration:none;color:var(--ink);transition:border-color .3s,transform .35s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+.contact a:hover{border-color:var(--y);transform:translateY(-4px);box-shadow:0 16px 36px -16px rgba(212,175,106,.3)}
 .contact small{display:block;color:var(--c);font:700 13px var(--head);letter-spacing:.08em}
 .contact b{font-size:1.05rem;word-break:break-all}
 footer{padding:30px 0 50px;color:var(--mut);border-top:1px solid var(--line);background:rgba(7,7,13,.8)}
 
-@media(max-width:760px){.grid,.skills{grid-template-columns:1fr}section{padding:60px 0}}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.svc{background:var(--panel);backdrop-filter:blur(16px) saturate(140%);border:1px solid var(--line);border-radius:4px;padding:22px;transition:border-color .3s,transform .35s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+.svc:hover{border-color:var(--c);transform:translateY(-4px);box-shadow:0 16px 36px -16px rgba(111,214,200,.3)}
+.svc .n{font:700 13px var(--head);color:var(--c);letter-spacing:.08em}
+.svc h3{font:700 1.15rem var(--head);margin:6px 0 8px}
+.svc p{color:var(--mut);font-size:.98rem}
+.freelance-cta{margin-top:32px;background:linear-gradient(120deg,rgba(252,238,10,.08),rgba(0,240,255,.08));border:1px solid var(--line);padding:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+.freelance-cta p{max-width:46ch;color:var(--mut)}
+.freelance-cta strong{color:var(--ink);display:block;font:700 1.2rem var(--head);margin-bottom:4px}
+
+@media(max-width:760px){.services{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+
+.process{position:relative;margin-top:44px}
+.process svg{position:absolute;top:36px;left:0;width:100%;height:2px;overflow:visible}
+.psteps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.pstep{display:flex;flex-direction:column;gap:12px}
+.pnum{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--y);display:flex;align-items:center;justify-content:center;font:700 16px var(--head);color:var(--y);background:var(--bg2);position:relative;z-index:1}
+.pstep h3{font:700 1.08rem var(--head)}
+.pstep p{color:var(--mut);font-size:.95rem}
+
+@media(max-width:760px){.grid,.skills{grid-template-columns:1fr}section{padding:60px 0}.psteps{grid-template-columns:1fr}.process svg{display:none}}
 @media(prefers-reduced-motion:reduce){.glitch::before,.glitch::after{animation:none!important}.status i{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -106,20 +131,26 @@ footer{padding:30px 0 50px;color:var(--mut);border-top:1px solid var(--line);bac
 
 <header><div class="wrap">
   <a class="brand" href="#top">KISHOR_A</a>
-  <nav aria-label="Sections"><a href="#work">Work</a><a href="#skills">Skills</a><a href="#background">Background</a><a href="#contact">Contact</a></nav>
+  <nav aria-label="Sections"><a href="#work">Work</a><a href="#process">Process</a><a href="#skills">Skills</a><a href="#freelance">Freelance</a><a href="#background">Background</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main id="top">
 <div class="wrap hero"><div>
   <h1 class="glitch go" data-t="Kishor A">Kishor A</h1>
-  <p class="tagline">I <b>build</b> web apps. I also <b>break</b> them.</p>
-  <p class="lead">Full Stack Developer and Technical Lead (2.5+ years, .NET Core, React, SQL, Azure) now focused on penetration testing: web and API security, Active Directory attack chains and live CTFs. TryHackMe top 15%. CPTv4 certified.</p>
-  <div class="cta"><a class="btn" href="#work">VIEW WORK</a><a class="btn alt" href="https://www.linkedin.com/in/kishor-a-59653023a/" target="_blank" rel="noopener">LINKEDIN</a><a class="btn alt" href="https://github.com/hackerrio34" target="_blank" rel="noopener">GITHUB</a></div>
-  <p class="status"><i></i>Open to full stack developer and junior penetration tester roles. Bengaluru, India.</p>
+  <p class="tagline">Full Stack <span class="role" id="role">Developer</span></p>
+  <p class="lead">I think in systems before I write a line of code — how it's built, how it scales, and how someone could break it. 3+ years shipping production .NET Core, React and SQL on Azure, paired with hands-on penetration testing: AD attack chains, web and API security, live CTFs. Every build is custom, never templated, and reviewed the way an attacker would review it.</p>
+  <div class="cta"><a class="btn" href="#work">VIEW WORK</a><a class="btn alt" href="#freelance">HIRE ME</a><a class="btn alt" href="https://github.com/hackerrio34" target="_blank" rel="noopener">GITHUB</a></div>
+  <p class="status"><i></i>Open to full stack developer, junior penetration tester and freelance roles. Bengaluru, India.</p>
+  <div class="stats">
+    <div><b>3+</b><span>YEARS DEV EXPERIENCE</span></div>
+    <div><b>TOP 15%</b><span>TRYHACKME RANK</span></div>
+    <div><b>CPTv4</b><span>CERTIFIED PENTESTER</span></div>
+    <div><b>4-6</b><span>DEVS LED</span></div>
+  </div>
 </div></div>
 
 <section id="work"><div class="wrap">
-  <h2>Work <span>/ build + break</span></h2>
+  <h2 class="reveal">Work <span>/ build + break</span></h2>
   <p class="sub">Production development and security research in one list. Filter by side.</p>
   <div class="filters" role="group" aria-label="Filter work">
     <button type="button" data-f="all" aria-pressed="true">ALL</button>
@@ -127,21 +158,39 @@ footer{padding:30px 0 50px;color:var(--mut);border-top:1px solid var(--line);bac
     <button type="button" data-f="break" aria-pressed="false">BREAK</button>
   </div>
   <div class="grid" id="ledger">
-    <div class="card" data-k="build"><span class="tag build">BUILD</span><h3>Enterprise rule engine API</h3><p>Production rule engine that validates 1,200+ records in about 6 seconds at 99.9% accuracy using async/await and optimized SQL. CSV ingestion pipelines on Azure Blob Storage, API-key access control, audit trails and strict server-side validation.</p><div class="chips"><span>.NET Core</span><span>Azure Blob</span><span>SQL</span><span>Async</span></div></div>
-    <div class="card" data-k="build"><span class="tag build">BUILD</span><h3>LMS platform</h3><p>Led full stack build: course management, MCQ evaluation and live sessions with Microsoft Teams Graph API and SCORM compliance. Role-based access for students, instructors and admins on an indexed SQL Server / MySQL schema.</p><div class="chips"><span>React</span><span>TypeScript</span><span>.NET Core</span><span>RBAC</span></div></div>
-    <div class="card" data-k="build"><span class="tag build">BUILD</span><h3>E-commerce platform</h3><p>Catalog, cart, order processing and payment gateway integration with tokenized payments, server-side validation, anomaly logging and real-time stock tracking with transactional consistency.</p><div class="chips"><span>React</span><span>.NET Core</span><span>SQL Server</span><span>PostgreSQL</span></div></div>
-    <div class="card" data-k="build break"><span class="tag build">BUILD</span><span class="tag break">BREAK</span><h3>Web vulnerability scanner (in progress)</h3><p>Python and FastAPI tool with Nmap integration for port and service scanning over a REST API. Designing toward a dual-mode engine (LLM-based and rule-based) for OWASP Top 10 style detection.</p><div class="chips"><span>Python</span><span>FastAPI</span><span>Nmap</span></div><a class="go" href="https://github.com/hackerrio34/ai-web-vuln-scanner" target="_blank" rel="noopener">SOURCE &gt;</a></div>
-    <div class="card" data-k="break"><span class="tag break">BREAK</span><h3>FamPay official CTF</h3><p>Reverse-engineered a custom request-signing scheme in a compiled shared library and rebuilt it in Python to forge admin API requests. Also exploited a Firebase anonymous authentication bypass.</p><div class="chips"><span>Reverse engineering</span><span>API signing</span><span>Firebase</span></div></div>
-    <div class="card" data-k="break"><span class="tag break">BREAK</span><h3>TryHackMe: Active Directory</h3><p>Attacktive Directory and Post Exploitation Basics: Kerbrute enumeration, AS-REP roasting, Kerberoasting, BloodHound path mapping, Mimikatz dumping, hash cracking and Golden Ticket forging.</p><div class="chips"><span>Impacket</span><span>BloodHound</span><span>Mimikatz</span></div><a class="go" href="https://github.com/hackerrio34/cyber-labs-tryhackme" target="_blank" rel="noopener">WRITEUPS &gt;</a></div>
-    <div class="card" data-k="break"><span class="tag break">BREAK</span><h3>VulnHub: DC-1 and DC-2</h3><p>DC-2: WordPress enumeration, CeWL wordlist, XML-RPC brute force, rbash escape, sudo git privesc. DC-1: Drupalgeddon then SUID binary abuse to root.</p><div class="chips"><span>WPScan</span><span>Drupalgeddon</span><span>Privesc</span></div><a class="go" href="https://github.com/hackerrio34/DC-2-VulnHub-/blob/main/DC-2_Walkthrough.md" target="_blank" rel="noopener">DC-2 WALKTHROUGH &gt;</a></div>
-    <div class="card" data-k="break"><span class="tag break">BREAK</span><h3>GoldenEye and web labs</h3><p>GoldenEye full chain: POP3 enumeration, credentials, Moodle RCE, root. Plus SQLi, XSS, LFI, IDOR, CSRF and business logic labs on TryHackMe and PortSwigger Web Security Academy.</p><div class="chips"><span>Moodle RCE</span><span>OWASP Top 10</span><span>Burp Suite</span></div><a class="go" href="https://tryhackme.com/p/hackerrio34" target="_blank" rel="noopener">TRYHACKME PROFILE &gt;</a></div>
+    <div class="card reveal" data-k="build"><span class="tag build">BUILD</span><h3>Enterprise rule engine API</h3><p>Production rule engine that validates 1,200+ records in about 6 seconds at 99.9% accuracy using async/await and optimized SQL. CSV ingestion pipelines on Azure Blob Storage, API-key access control, audit trails and strict server-side validation.</p><div class="chips"><span>.NET Core</span><span>Azure Blob</span><span>SQL</span><span>Async</span></div></div>
+    <div class="card reveal" data-k="build"><span class="tag build">BUILD</span><h3>LMS platform</h3><p>Led full stack build: course management, MCQ evaluation and live sessions with Microsoft Teams Graph API and SCORM compliance. Role-based access for students, instructors and admins on an indexed SQL Server / MySQL schema.</p><div class="chips"><span>React</span><span>TypeScript</span><span>.NET Core</span><span>RBAC</span></div></div>
+    <div class="card reveal" data-k="build"><span class="tag build">BUILD</span><h3>E-commerce platform</h3><p>Catalog, cart, order processing and payment gateway integration with tokenized payments, server-side validation, anomaly logging and real-time stock tracking with transactional consistency.</p><div class="chips"><span>React</span><span>.NET Core</span><span>SQL Server</span><span>PostgreSQL</span></div></div>
+    <div class="card reveal" data-k="build"><span class="tag build">BUILD</span><h3>Sentiment analysis (text, audio, video)</h3><p>College project: Flask web app classifying sentiment across text, audio and video inputs using scikit-learn and NLTK. EDA and feature engineering in pandas, results and predictions stored in PostgreSQL for comparative SQL analysis.</p><div class="chips"><span>Flask</span><span>scikit-learn</span><span>NLTK</span><span>PostgreSQL</span></div></div>
+    <div class="card reveal" data-k="build"><span class="tag build">BUILD</span><h3>Spin Wheel IT quiz game</h3><p>Interactive quiz game where spinning a wheel randomly selects the question. Built with vanilla HTML, CSS and JavaScript for a responsive, dependency-free UI.</p><div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span></div></div>
+    <div class="card reveal" data-k="build break"><span class="tag build">BUILD</span><span class="tag break">BREAK</span><h3>Web vulnerability scanner (in progress)</h3><p>Python and FastAPI tool with Nmap integration for port and service scanning over a REST API. Designing toward a dual-mode engine (LLM-based and rule-based) for OWASP Top 10 style detection.</p><div class="chips"><span>Python</span><span>FastAPI</span><span>Nmap</span></div><a class="go" href="https://github.com/hackerrio34/ai-web-vuln-scanner" target="_blank" rel="noopener">SOURCE &gt;</a></div>
+    <div class="card reveal" data-k="break"><span class="tag break">BREAK</span><h3>FamPay official CTF</h3><p>Reverse-engineered a custom request-signing scheme in a compiled shared library and rebuilt it in Python to forge admin API requests. Also exploited a Firebase anonymous authentication bypass.</p><div class="chips"><span>Reverse engineering</span><span>API signing</span><span>Firebase</span></div></div>
+    <div class="card reveal" data-k="break"><span class="tag break">BREAK</span><h3>TryHackMe: Active Directory</h3><p>Attacktive Directory and Post Exploitation Basics: Kerbrute enumeration, AS-REP roasting, Kerberoasting, BloodHound path mapping, Mimikatz dumping, hash cracking and Golden Ticket forging.</p><div class="chips"><span>Impacket</span><span>BloodHound</span><span>Mimikatz</span></div><a class="go" href="https://github.com/hackerrio34/cyber-labs-tryhackme" target="_blank" rel="noopener">WRITEUPS &gt;</a></div>
+    <div class="card reveal" data-k="break"><span class="tag break">BREAK</span><h3>Dogcat: LFI to full host root</h3><p>Chained a substring-whitelist bypass and a hidden extension parameter into arbitrary file read, used a PHP filter chain for disk-write-free RCE, then escaped the Docker container by hijacking a cron job running as root on the host.</p><div class="chips"><span>LFI</span><span>PHP filter chains</span><span>Container escape</span></div><a class="go" href="https://github.com/hackerrio34/cyber-labs-tryhackme/blob/main/dogcat-thm-writeup.md" target="_blank" rel="noopener">WRITEUP &gt;</a></div>
+    <div class="card reveal" data-k="break"><span class="tag break">BREAK</span><h3>Network Services room</h3><p>Enumerated SMB, FTP and Telnet on a single box. Leaked SSH keys via an SMB misconfig, triggered a Telnet backdoor for a reverse shell, and brute-forced weak FTP credentials with Hydra.</p><div class="chips"><span>enum4linux</span><span>smbclient</span><span>Hydra</span></div><a class="go" href="https://github.com/hackerrio34/cyber-labs-tryhackme/tree/main/network-services" target="_blank" rel="noopener">WRITEUP &gt;</a></div>
+    <div class="card reveal" data-k="break"><span class="tag break">BREAK</span><h3>VulnHub: DC-1 and DC-2</h3><p>DC-2: WordPress enumeration, CeWL wordlist, XML-RPC brute force, rbash escape, sudo git privesc. DC-1: Drupalgeddon then SUID binary abuse to root.</p><div class="chips"><span>WPScan</span><span>Drupalgeddon</span><span>Privesc</span></div><a class="go" href="https://github.com/hackerrio34/DC-2-VulnHub-/blob/main/DC-2_Walkthrough.md" target="_blank" rel="noopener">DC-2 WALKTHROUGH &gt;</a></div>
+    <div class="card reveal" data-k="break"><span class="tag break">BREAK</span><h3>GoldenEye and web labs</h3><p>GoldenEye full chain: POP3 enumeration, credentials, Moodle RCE, root. Plus SQLi, XSS, LFI, IDOR, CSRF and business logic labs on TryHackMe and PortSwigger Web Security Academy.</p><div class="chips"><span>Moodle RCE</span><span>OWASP Top 10</span><span>Burp Suite</span></div><a class="go" href="https://tryhackme.com/p/hackerrio34" target="_blank" rel="noopener">TRYHACKME PROFILE &gt;</a></div>
+  </div>
+</div></section>
+
+<section id="process"><div class="wrap">
+  <h2 class="reveal">How I Work <span>/ think, build, break, fix</span></h2>
+  <p class="sub reveal">No templates. Every project starts from how it needs to work and how it could fail.</p>
+  <div class="process reveal">
+    <svg viewBox="0 0 400 4" preserveAspectRatio="none" aria-hidden="true"><path d="M20 2 C120 2, 280 2, 380 2" stroke="#d4af6a" stroke-width="1" stroke-dasharray="2 5" fill="none" opacity=".5"/></svg>
+    <div class="psteps">
+      <div class="pstep"><span class="pnum">01</span><h3>Think</h3><p>Map the system, the data flow and the realistic threat model before any design or code.</p></div>
+      <div class="pstep"><span class="pnum">02</span><h3>Design</h3><p>Architecture and UI decisions made together — custom to the problem, not a boilerplate.</p></div>
+      <div class="pstep"><span class="pnum">03</span><h3>Build</h3><p>.NET Core, React, SQL, shipped with tests, structured logging and CI/CD on Azure.</p></div>
+      <div class="pstep"><span class="pnum">04</span><h3>Secure</h3><p>I attack what I just built: OWASP Top 10 review, auth and access control checks, a remediation report.</p></div>
+    </div>
   </div>
 </div></section>
 
 <section id="skills"><div class="wrap">
-  <h2>Skills <span>/ stack</span></h2>
+  <h2 class="reveal">Skills <span>/ stack</span></h2>
   <p class="sub">Knowing how apps are built is the edge when testing them: I can read the source, not just probe the surface.</p>
-  <div class="skills">
+  <div class="skills reveal">
     <div class="b"><h3>Build</h3>
       <p><strong>Languages:</strong> C#, Python (FastAPI, Flask), TypeScript, JavaScript, SQL, T-SQL</p>
       <p><strong>Frameworks:</strong> .NET Core, ASP.NET Core, React, REST APIs</p>
@@ -154,9 +203,9 @@ footer{padding:30px 0 50px;color:var(--mut);border-top:1px solid var(--line);bac
 </div></section>
 
 <section id="background"><div class="wrap">
-  <h2>Background <span>/ log</span></h2>
-  <div class="tl">
-    <article><time>SEP 2023 - JAN 2026</time><h3>Full Stack Developer and Technical Lead</h3><p class="org">Cognultsoft Analytics, Bengaluru</p><ul><li>Led 4-6 developers on a React front end and .NET Core / SQL back end; owned code reviews, architecture and secure coding</li><li>Worked with EMEA and US stakeholders; set up Azure DevOps CI pipelines and Git branching</li></ul></article>
+  <h2 class="reveal">Background <span>/ log</span></h2>
+  <div class="tl reveal">
+    <article><time>MAY 2023 - JAN 2026</time><h3>Full Stack Developer and Technical Lead</h3><p class="org">Cognultsoft Analytics, Bengaluru — started as an intern, converted to full-time</p><ul><li>Led 4-6 developers on a React front end and .NET Core / SQL back end; owned code reviews, architecture and secure coding</li><li>Worked with EMEA and US stakeholders; set up Azure DevOps CI pipelines and Git branching</li></ul></article>
     <article><time>AUG 2025 - DEC 2026 (IN PROGRESS)</time><h3>MSc Cyber Forensics and Information Security</h3><p class="org">University of Madras</p></article>
     <article><time>CERTIFIED</time><h3>CPTv4: Certified Penetration Tester</h3><p class="org">Red Team Hacker Academy, Bengaluru</p></article>
     <article><time>IN PROGRESS</time><h3>eJPT: Junior Penetration Tester</h3><p class="org">INE Security</p></article>
@@ -164,10 +213,24 @@ footer{padding:30px 0 50px;color:var(--mut);border-top:1px solid var(--line);bac
   </div>
 </div></section>
 
+<section id="freelance"><div class="wrap">
+  <h2 class="reveal">Freelance <span>/ for hire</span></h2>
+  <p class="sub reveal">No templates, no page builders. Every engagement is scoped to your system, not fitted to a pre-built one — and I check my own work for the holes an attacker would find first.</p>
+  <div class="services">
+    <div class="svc reveal"><span class="n">01</span><h3>Custom web & API builds</h3><p>React/TypeScript front ends on .NET Core APIs, designed around your actual data model. Auth, RBAC, payments, CI/CD on Azure.</p></div>
+    <div class="svc reveal"><span class="n">02</span><h3>Security review</h3><p>OWASP Top 10 assessment of your web app or API before it ships, with a written remediation report, not just a scan output.</p></div>
+    <div class="svc reveal"><span class="n">03</span><h3>Maintenance & fixes</h3><p>Bug fixes, performance tuning, and hardening on existing .NET/React or Python codebases.</p></div>
+  </div>
+  <div class="freelance-cta reveal">
+    <p><strong>Have a project in mind?</strong>Tell me the scope and timeline, I'll reply with availability and a quote.</p>
+    <a class="btn" href="mailto:krishkishor245@gmail.com?subject=Freelance%20project%20inquiry">EMAIL ME</a>
+  </div>
+</div></section>
+
 <section id="contact"><div class="wrap">
-  <h2>Contact <span>/ open channel</span></h2>
+  <h2 class="reveal">Contact <span>/ open channel</span></h2>
   <p class="sub">Hiring for a developer or security role? Email is fastest.</p>
-  <div class="contact">
+  <div class="contact reveal">
     <a href="mailto:krishkishor245@gmail.com"><small>EMAIL</small><b>krishkishor245@gmail.com</b></a>
     <a href="https://www.linkedin.com/in/kishor-a-59653023a/" target="_blank" rel="noopener"><small>LINKEDIN</small><b>kishor-a-59653023a</b></a>
     <a href="https://github.com/hackerrio34" target="_blank" rel="noopener"><small>GITHUB</small><b>hackerrio34</b></a>
@@ -191,6 +254,28 @@ footer{padding:30px 0 50px;color:var(--mut);border-top:1px solid var(--line);bac
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 
+  /* role rotator */
+  var roleEl=document.getElementById('role');
+  if(roleEl){
+    var roles=['Developer','Penetration Tester','Freelancer'],ri=0;
+    if(reduce){roleEl.textContent=roles[0]}else{
+      setInterval(function(){
+        ri=(ri+1)%roles.length;
+        roleEl.style.opacity=0;
+        setTimeout(function(){roleEl.textContent=roles[ri];roleEl.style.opacity=1},250);
+      },2600);
+      roleEl.style.transition='opacity .25s';
+    }
+  }
+
+  /* scroll reveal */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  }else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')})}
+
   /* 3D card tilt */
   if(fine&&!reduce){cards.forEach(function(c){
     c.addEventListener('pointermove',function(e){
@@ -204,28 +289,48 @@ footer{padding:30px 0 50px;color:var(--mut);border-top:1px solid var(--line);bac
   if(!window.THREE){return}
   var cv=document.getElementById('gl'),small=innerWidth<760;
   var R=new THREE.WebGLRenderer({canvas:cv,antialias:!small});
-  R.setPixelRatio(Math.min(devicePixelRatio,2));R.setClearColor(0x07070d);
-  var S=new THREE.Scene();S.fog=new THREE.FogExp2(0x07070d,.028);
+  R.setPixelRatio(Math.min(devicePixelRatio,2));R.setClearColor(0x060a16);
+  var S=new THREE.Scene();S.fog=new THREE.FogExp2(0x060a16,.03);
   var cam=new THREE.PerspectiveCamera(60,1,.1,300);cam.position.set(0,5,20);
 
-  var seg=small?48:96,tg=new THREE.PlaneGeometry(160,160,seg,seg);tg.rotateX(-Math.PI/2);
-  var terrain=new THREE.Mesh(tg,new THREE.MeshBasicMaterial({color:0x00f0ff,wireframe:true,transparent:true,opacity:.32}));
-  terrain.position.y=-5;S.add(terrain);
-  var tp=tg.attributes.position;
-  function shape(t){for(var i=0;i<tp.count;i++){var x=tp.getX(i),z=tp.getZ(i);
-    tp.setY(i,Math.sin(x*.22+t)*1.8+Math.cos(z*.18+t*.8)*1.6+Math.sin((x+z)*.09+t*.5)*2.6)}
-    tp.needsUpdate=true}
+  /* soft circular sprite texture for glowing dust (no hard square dots) */
+  function glowTex(hex){
+    var cv2=document.createElement('canvas');cv2.width=cv2.height=64;
+    var g=cv2.getContext('2d'),r=g.createRadialGradient(32,32,0,32,32,32);
+    r.addColorStop(0,hex+'ff');r.addColorStop(.35,hex+'88');r.addColorStop(1,hex+'00');
+    g.fillStyle=r;g.beginPath();g.arc(32,32,32,0,7);g.fill();
+    var tx=new THREE.CanvasTexture(cv2);return tx;
+  }
+  var goldTex=glowTex('#d4af6a'),tealTex=glowTex('#6fd6c8');
 
-  var n=small?700:2000,pg=new THREE.BufferGeometry(),pa=new Float32Array(n*3);
-  for(var i=0;i<n;i++){pa[i*3]=(Math.random()-.5)*140;pa[i*3+1]=Math.random()*40-4;pa[i*3+2]=(Math.random()-.5)*160}
-  pg.setAttribute('position',new THREE.BufferAttribute(pa,3));
-  var pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xfcee0a,size:.2,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));
-  S.add(pts);
+  /* slow drifting dust, two soft layers */
+  function dust(n,spread,tex,size,depth){
+    var pg=new THREE.BufferGeometry(),pa=new Float32Array(n*3);
+    for(var i=0;i<n;i++){pa[i*3]=(Math.random()-.5)*spread;pa[i*3+1]=(Math.random()-.5)*spread*.6;pa[i*3+2]=(Math.random()-.5)*depth-depth*.3}
+    pg.setAttribute('position',new THREE.BufferAttribute(pa,3));
+    var m=new THREE.PointsMaterial({size:size,map:tex,transparent:true,opacity:.8,blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true});
+    return new THREE.Points(pg,m);
+  }
+  var dustA=dust(small?160:420,70,goldTex,1.1,60);S.add(dustA);
+  var dustB=dust(small?120:320,90,tealTex,.85,70);S.add(dustB);
 
-  var ico=new THREE.Mesh(new THREE.IcosahedronGeometry(4,1),new THREE.MeshBasicMaterial({color:0xfcee0a,wireframe:true}));
-  ico.position.set(9,5,-6);S.add(ico);
-  var knot=new THREE.Mesh(new THREE.TorusKnotGeometry(2.2,.5,90,10),new THREE.MeshBasicMaterial({color:0x00f0ff,wireframe:true,transparent:true,opacity:.6}));
-  knot.position.set(-11,3,-18);S.add(knot);
+  /* a few slow-tumbling faceted glass gems, gold and teal, low-poly premium look */
+  function gem(radius,detail,hex,opacity){
+    var geo=new THREE.IcosahedronGeometry(radius,detail);
+    var mat=new THREE.MeshBasicMaterial({color:hex,wireframe:true,transparent:true,opacity:opacity});
+    return new THREE.Mesh(geo,mat);
+  }
+  var gems=[
+    {m:gem(2.6,1,0xd4af6a,.5),pos:[8,4,-14],spin:[.05,.09,0]},
+    {m:gem(1.7,0,0x6fd6c8,.45),pos:[-10,-2,-22],spin:[.07,.04,.02]},
+    {m:gem(3.4,1,0x6fd6c8,.3),pos:[-4,8,-30],spin:[.03,.06,0]},
+    {m:gem(1.3,0,0xd4af6a,.55),pos:[12,-4,-10],spin:[.08,.05,.03]}
+  ];
+  gems.forEach(function(g){g.m.position.set.apply(g.m.position,g.pos);S.add(g.m)});
+
+  /* soft halo glow behind the largest gem for depth */
+  var halo=new THREE.Sprite(new THREE.SpriteMaterial({map:goldTex,transparent:true,opacity:.18,blending:THREE.AdditiveBlending,depthWrite:false}));
+  halo.scale.set(26,26,1);halo.position.set(-4,8,-31);S.add(halo);
 
   function size(){var w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
   size();addEventListener('resize',size);
@@ -235,16 +340,16 @@ footer{padding:30px 0 50px;color:var(--mut);border-top:1px solid var(--line);bac
   var clock=new THREE.Clock(),raf=0;
   function frame(){
     var t=clock.getElapsedTime(),max=Math.max(1,document.documentElement.scrollHeight-innerHeight),p=scrollY/max;
-    shape(t*.6);
-    pts.rotation.y=t*.02;pts.position.y=Math.sin(t*.3)*.6;
-    ico.rotation.x=t*.25;ico.rotation.y=t*.35;ico.position.y=5+Math.sin(t*.6)*.8;
-    knot.rotation.x=t*.3;knot.rotation.z=t*.2;
-    cam.position.z=20-p*42;cam.position.y=5-p*3+my*-1.5;cam.position.x=mx*3;
-    cam.rotation.y=-mx*.12;cam.rotation.x=-.12+my*.05;
+    dustA.rotation.y=t*.015;dustA.position.y=Math.sin(t*.15)*.6;
+    dustB.rotation.y=-t*.012;dustB.position.y=Math.cos(t*.18)*.5;
+    gems.forEach(function(g,i){g.m.rotation.x=t*g.spin[0];g.m.rotation.y=t*g.spin[1];g.m.rotation.z=t*g.spin[2];g.m.position.y=g.pos[1]+Math.sin(t*.25+i)*.5});
+    halo.material.opacity=.14+Math.sin(t*.6)*.04;
+    cam.position.z=20-p*10;cam.position.y=5-p*2+my*-1.2;cam.position.x=mx*2.4;
+    cam.rotation.y=-mx*.07;cam.rotation.x=-.05+my*.035;
     R.render(S,cam);
     raf=requestAnimationFrame(frame);
   }
-  if(reduce){shape(0);R.render(S,cam);addEventListener('resize',function(){R.render(S,cam)});return}
+  if(reduce){R.render(S,cam);addEventListener('resize',function(){R.render(S,cam)});return}
   frame();
   document.addEventListener('visibilitychange',function(){
     if(document.hidden){cancelAnimationFrame(raf)}else{clock.getDelta();frame()}
